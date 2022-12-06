@@ -16,19 +16,19 @@ public class DentistController {
     }
 
     @PostMapping
-    public ResponseEntity<DentistDto> createUser(@RequestBody DentistDto dentistDto) {
+    public ResponseEntity<DentistDto> createDentist(@RequestBody DentistDto dentistDto) {
         DentistDto savedUser = dentistService.save(dentistDto);
         return ResponseEntity.ok().body(savedUser);
     }
 
     @GetMapping("/{credential}")
-    public ResponseEntity<DentistDto> getByUsername(@PathVariable String credential) {
+    public ResponseEntity<DentistDto> getDentistByCredential(@PathVariable String credential) {
         DentistDto dentist = dentistService.getByCredential(credential);
         return ResponseEntity.ok().body(dentist);
     }
 
     @GetMapping
-    public ResponseEntity<List<DentistDto>> getAll() {
+    public ResponseEntity<List<DentistDto>> getAllDentists() {
         List<DentistDto> dentistDtos = dentistService.getAll();
         return ResponseEntity.ok().body(dentistDtos);
     }

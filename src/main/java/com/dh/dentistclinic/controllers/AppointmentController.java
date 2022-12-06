@@ -19,14 +19,14 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<AppointmentDto> createPatient(@RequestBody Appointment pppointment) {
-        AppointmentDto savedUser = appointmentService.save(pppointment);
-        return ResponseEntity.ok().body(savedUser);
+    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody Appointment pppointment) {
+        AppointmentDto savedAppointment = appointmentService.save(pppointment);
+        return ResponseEntity.ok().body(savedAppointment);
     }
 
     @GetMapping
-    public ResponseEntity<List<AppointmentDto>> getAll() {
-        List<AppointmentDto> dentistDtos = appointmentService.getAll();
-        return ResponseEntity.ok().body(dentistDtos);
+    public ResponseEntity<List<AppointmentDto>> getAllAppointments() {
+        List<AppointmentDto> appointmentDtos = appointmentService.getAll();
+        return ResponseEntity.ok().body(appointmentDtos);
     }
 }
