@@ -7,7 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     @GetMapping
-    public String welcome() {
-        return "<h1>Welcome, traveler.</h1>";
-    }
+    public String hello(){return "Hello World of JWT!";}
 }
