@@ -21,12 +21,22 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         AppUser user = new AppUser();
+        AppUser userAdmin = new AppUser();
         String hashedPassword = passwordEncoder.encode("password");
         user.setName("Apolo");
         user.setUsername("apolo");
         user.setPassword(hashedPassword);
         user.setEmail("dh@dh.com");
         user.setRole(AppUserRole.USER);
+
+
+        userAdmin.setName("Nina");
+        userAdmin.setUsername("nina");
+        userAdmin.setPassword(hashedPassword);
+        userAdmin.setEmail("dh@dh.com");
+        userAdmin.setRole(AppUserRole.ADMIN);
+
         userRepository.save(user);
+        userRepository.save(userAdmin);
     }
 }
