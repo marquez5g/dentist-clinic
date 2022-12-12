@@ -33,17 +33,12 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDto getByDni(String dni) {
-        return patientRepository.findByDni(dni);
+        return mapToDto(patientRepository.findByDni(dni));
     }
 
     @Override
     public List<PatientDto> getAll() {
         return patientRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public PatientDto update(PatientDto patient) {
-        return mapToDto(patientRepository.save(mapToEntity(patient)));
     }
 
     private PatientDto mapToDto (Patient patient) {

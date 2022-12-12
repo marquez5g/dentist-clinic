@@ -11,5 +11,4 @@ public interface PatientService {
     void delete(PatientDto user);
     PatientDto getByDni(String username);
     List<PatientDto> getAll();
-    PatientDto update(PatientDto user);
 }
