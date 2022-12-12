@@ -1,7 +1,6 @@
 package com.dh.dentistclinic.controllers;
 
 import com.dh.dentistclinic.dto.AppointmentDto;
-import com.dh.dentistclinic.entities.Appointment;
 import com.dh.dentistclinic.services.AppointmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,8 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody Appointment pppointment) {
-        AppointmentDto savedAppointment = appointmentService.save(pppointment);
+    public ResponseEntity<AppointmentDto> createAppointment(@RequestBody AppointmentDto apppointment) {
+        AppointmentDto savedAppointment = appointmentService.save(apppointment);
         return ResponseEntity.ok().body(savedAppointment);
     }
 
