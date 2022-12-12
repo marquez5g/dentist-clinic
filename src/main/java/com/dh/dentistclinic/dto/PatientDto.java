@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -16,5 +15,5 @@ public class PatientDto {
     private String lastName;
     private String address;
     private String dni;
-    private LocalDate dischargeDate;
+    private String dischargeDate;
 }
