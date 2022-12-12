@@ -9,6 +9,8 @@ import com.dh.dentistclinic.repositories.DentistRepository;
 import com.dh.dentistclinic.repositories.PatientRepository;
 import com.dh.dentistclinic.services.AppointmentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +27,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final DentistRepository dentistRepository;
 
+    private final Logger log = LoggerFactory.getLogger(AppointmentServiceImpl.class);
+
 
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, PatientRepository patientRepository, DentistRepository dentistRepository) {
@@ -40,6 +44,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         Appointment appointment = mapToEntity(appointmentDto);
         appointment.setPatient(patient);
         appointment.setDentist(dentist);
+        log.info("Request to save Appointment : {}", appointment);
         return mapToDto(appointmentRepository.save(appointment));
     }
 
@@ -50,16 +55,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDto> getAll() {
+        log.info("Request to get all Appointments");
         return appointmentRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<AppointmentDto> getAllByDentistCredential(String credential) {
+        log.info("Request to get all Appointments by Dentist credential {}", credential);
         return appointmentRepository.findAllByDentistCredential(credential).stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<AppointmentDto> getAllByPatientDni(String dni) {
+        log.info("Request to get all Appointments by Patient dni {}", dni);
         return appointmentRepository.findAllByPatientDni(dni).stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
