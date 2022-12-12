@@ -28,4 +28,16 @@ public class AppointmentController {
         List<AppointmentDto> appointmentDtos = appointmentService.getAll();
         return ResponseEntity.ok().body(appointmentDtos);
     }
+
+    @GetMapping("/patients/{dni}")
+    public ResponseEntity<List<AppointmentDto>> getAllByPatientDni(@PathVariable String dni) {
+        List<AppointmentDto> appointmentDtos = appointmentService.getAllByPatientDni(dni);
+        return ResponseEntity.ok().body(appointmentDtos);
+    }
+
+    @GetMapping("/dentists/{credential}")
+    public ResponseEntity<List<AppointmentDto>> getAllByDentistCredential(@PathVariable String credential) {
+        List<AppointmentDto> appointmentDtos = appointmentService.getAllByDentistCredential(credential);
+        return ResponseEntity.ok().body(appointmentDtos);
+    }
 }
