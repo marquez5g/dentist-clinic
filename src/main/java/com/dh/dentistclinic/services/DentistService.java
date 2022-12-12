@@ -8,5 +8,4 @@ public interface DentistService {
     void delete(String credential);
     DentistDto getByCredential(String credential);
     List<DentistDto> getAll();
-    DentistDto update(DentistDto dentist);
 }

@@ -42,11 +42,6 @@ public class DentistServiceImpl implements DentistService {
         return dentistRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
-    @Override
-    public DentistDto update(DentistDto dentistDto) {
-        return mapToDto(dentistRepository.save(mapToEntity(dentistDto)));
-    }
-
     private DentistDto mapToDto (Dentist dentist) {
         return mapper.convertValue(dentist, DentistDto.class);
     }
