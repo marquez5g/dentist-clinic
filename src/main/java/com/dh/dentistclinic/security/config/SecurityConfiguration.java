@@ -28,8 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/auth", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
-                .and().csrf().ignoringAntMatchers("/h2-console/**")
-                .and().headers().frameOptions().sameOrigin()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
