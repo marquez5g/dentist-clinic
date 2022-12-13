@@ -1,6 +1,7 @@
 package com.dh.dentistclinic.controllers;
 
 import com.dh.dentistclinic.dto.AppointmentDto;
+import com.dh.dentistclinic.exceptions.EntityNotFoundException;
 import com.dh.dentistclinic.services.AppointmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,13 @@ public class AppointmentController {
     }
 
     @GetMapping("/patients/{dni}")
-    public ResponseEntity<List<AppointmentDto>> getAllByPatientDni(@PathVariable String dni) {
+    public ResponseEntity<List<AppointmentDto>> getAllByPatientDni(@PathVariable String dni) throws EntityNotFoundException {
         List<AppointmentDto> appointmentDtos = appointmentService.getAllByPatientDni(dni);
         return ResponseEntity.ok().body(appointmentDtos);
     }
 
     @GetMapping("/dentists/{credential}")
-    public ResponseEntity<List<AppointmentDto>> getAllByDentistCredential(@PathVariable String credential) {
+    public ResponseEntity<List<AppointmentDto>> getAllByDentistCredential(@PathVariable String credential) throws EntityNotFoundException {
         List<AppointmentDto> appointmentDtos = appointmentService.getAllByDentistCredential(credential);
         return ResponseEntity.ok().body(appointmentDtos);
     }
