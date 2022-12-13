@@ -4,6 +4,7 @@ import com.dh.dentistclinic.dto.AppointmentDto;
 import com.dh.dentistclinic.entities.Appointment;
 import com.dh.dentistclinic.entities.Dentist;
 import com.dh.dentistclinic.entities.Patient;
+import com.dh.dentistclinic.exceptions.EntityNotFoundException;
 import com.dh.dentistclinic.repositories.AppointmentRepository;
 import com.dh.dentistclinic.repositories.DentistRepository;
 import com.dh.dentistclinic.repositories.PatientRepository;
@@ -60,14 +61,24 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDto> getAllByDentistCredential(String credential) {
+    public List<AppointmentDto> getAllByDentistCredential(String credential) throws EntityNotFoundException {
         log.info("Request to get all Appointments by Dentist credential {}", credential);
-        return appointmentRepository.findAllByDentistCredential(credential).stream().map(this::mapToDto).collect(Collectors.toList());
+        List<Appointment> appointments = appointmentRepository.findAllByDentistCredential(credential);
+        if (appointments.isEmpty()) {
+            log.info("No appointments found for dentist with credential {}", credential);
+            throw new EntityNotFoundException("No se encontraron turnos para el dentista con credencial " + credential);
+        }
+        return appointments.stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<AppointmentDto> getAllByPatientDni(String dni) {
+    public List<AppointmentDto> getAllByPatientDni(String dni) throws EntityNotFoundException {
         log.info("Request to get all Appointments by Patient dni {}", dni);
+        List<Appointment> appointments = appointmentRepository.findAllByPatientDni(dni);
+        if (appointments.isEmpty()) {
+            log.info("No appointments found for dentist with credential {}", dni);
+            throw new EntityNotFoundException("No se encontraron turnos para el paciente con dni " + dni);
+        }
         return appointmentRepository.findAllByPatientDni(dni).stream().map(this::mapToDto).collect(Collectors.toList());
     }
 
